@@ -157,7 +157,8 @@ switch (_vehicle) do
 		[
 			["#(argb,8,8,3)color(0.05,0.05,0.05,1)","fed"],
 			["icons\hunter_test_03.jpg","cop","icons\hunter_test_back_03.jpg"],
-			["icons\hunter_mardorz.jpg","cop","icons\hunter_mardorz_back.jpg"]
+			["icons\hunter_test_03.jpg","cop","icons\hunter_test_back_03.jpg"]
+			//["icons\hunter_mardorz.jpg","cop","icons\hunter_mardorz_back.jpg"]
 		];
 	};
 	
