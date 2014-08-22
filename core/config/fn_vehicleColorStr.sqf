@@ -157,7 +157,7 @@ switch (_vehicle) do
 		{
 			case 0: {_color = "Black"};
 			case 1: {_color = "SWAT"};
-			//case 2: {_color = "Mardorz Only"};
+			case 2: {_color = "Mardorz Only"};
 		};
 	};
 	

@@ -33,7 +33,6 @@ switch (_filter) do
 			_ret set[count _ret,["U_O_OfficerUniform_ocamo",nil,7500]];
 			_ret set[count _ret,["U_I_GhillieSuit",nil,10000]];
 			_ret set[count _ret,["U_NikosAgedBody","Lawyer",20000]];
-			_ret set[count _ret,["U_C_PriestBody","Lawyer",25000]];
 		};
 	};
 
