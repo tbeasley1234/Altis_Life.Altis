@@ -34,7 +34,7 @@ switch (_vehicle) do
 			[_path + "hatchback_01_ext_sport04_co.paa","donate"],
 			[_path + "hatchback_01_ext_sport05_co.paa","donate"],
 			[_path + "hatchback_01_ext_sport06_co.paa","donate"],
-			["#(ai,64,64,1)Fresnel(1.3,7)","cop"],
+			["icons\Cop_Sports.jpg","cop"],
 			["textures\med\EMS_hatchback.jpg","med"]
 		];
 	};
