@@ -21,7 +21,7 @@ _unit setVariable["restrained",FALSE,TRUE];
 _unit setVariable["Escorting",FALSE,TRUE];
 _unit setVariable["transporting",FALSE,TRUE]; //Again why the fuck am I setting this? Can anyone tell me?
 _unit setVariable["steam64id", (getPlayerUID player),true]; //Reset the UID.
-_unit setVariable["name", player getVariable["realname",name player],true]; //Reset the players name.
+_unit setVariable["realname", player getVariable["realname",name player],true]; //Reset the players name.
 
 //Load our gear as a cop incase something horrible happens
 if(playerSide == west) then {
