@@ -15,18 +15,17 @@ _unit enableFatigue false;
 private["_containers"];
 _containers = nearestObjects[getPosATL _corpse,["WeaponHolderSimulated"],5]; //Fetch list of containers (Simulated = weapons)
 {deleteVehicle _x;} foreach _containers; //Delete the containers.
+
 //Set some vars on our new body.
 _unit setVariable["restrained",FALSE,TRUE];
 _unit setVariable["Escorting",FALSE,TRUE];
 _unit setVariable["transporting",FALSE,TRUE]; //Again why the fuck am I setting this? Can anyone tell me?
+_unit setVariable["steam64id", (getPlayerUID player),true]; //Reset the UID.
+_unit setVariable["realname", player getVariable["realname",name player],true]; //Reset the players name.
 
 //Load our gear as a cop incase something horrible happens
 if(playerSide == west) then {
 	[] spawn life_fnc_loadGear;
-	[] call life_fnc_equipGear;
-};
-if(playerSide == independent) then {
-	[] call life_fnc_equipGear;
 };
 
 _unit addRating 9999999999999999; //Set our rating to a high value, this is for a ARMA engine thing.
@@ -34,4 +33,5 @@ player playMoveNow "amovppnemstpsraswrfldnon";
 
 [] call life_fnc_setupActions;
 [[_unit,life_sidechat,playerSide],"TON_fnc_managesc",false,false] spawn life_fnc_MP;
+
 [] call life_fnc_equipGear;
