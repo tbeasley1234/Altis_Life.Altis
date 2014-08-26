@@ -40,3 +40,11 @@ if(_container isKindOf "Car" || _container isKindOf "Ship" || _container isKindO
 		};
 	};
 };
+
+//This prevents people from looting dead bodies (Temp Fix for Duping)
+if(_container isKindOf "Man") exitWith {
+	[] spawn {
+		waitUntil {!isNull (findDisplay 602)};
+		closeDialog 0;
+	};
+};
