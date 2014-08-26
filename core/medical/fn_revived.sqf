@@ -24,7 +24,6 @@ if(life_atmcash > (call life_revive_fee)) then {
 	life_atmcash = 0;
 };
 
-[] call life_fnc_equipGear;
 //Bring me back to life.
 player setDir _dir;
 player setPosASL (visiblePositionASL life_corpse);
@@ -36,7 +35,9 @@ hideBody life_corpse;
 player setVariable["Revive",nil,TRUE];
 player setVariable["name",nil,TRUE];
 player setVariable["Reviving",nil,TRUE];
-//[] call life_fnc_hudUpdate; //Request update of hud.
+
+[] call life_fnc_equipGear;
+[] call life_fnc_hudUpdate; //Request update of hud.
 
 /*
 switch (playerSide) do {							// Added to try and fix uniform issues with medics when revived
