@@ -38,7 +38,7 @@ switch (typeOf _vehicle) do
 	
 	case "C_Hatchback_01_sport_F":
 	{
-		_lightleft lightAttachObject [_vehicle, [-0.37,-1.1,0.42]];
+		_lightleft lightAttachObject [_vehicle, [-0.37,-1.2,0.42]];
 	};
 };
 
@@ -73,7 +73,7 @@ switch (typeOf _vehicle) do
 	
 	case "C_Hatchback_01_sport_F":
 	{
-		_lightright lightAttachObject [_vehicle, [0.37,-1.1,0.42]];
+		_lightright lightAttachObject [_vehicle, [0.37,-1.2,0.42]];
 	};
 
 };
