@@ -36,7 +36,6 @@ _clothes = switch (life_clothing_store) do
 	case "cop": {[_selection] call life_fnc_clothing_cop;};
 	case "reb": {[_selection] call life_fnc_clothing_reb;};
 	case "dive": {[_selection] call life_fnc_clothing_dive;};
-	case "donator": {[_selection] call life_fnc_clothing_donator;};				//Added for donator clothing store - Blindy
 	case "kart": {[_selection] call life_fnc_clothing_kart;};
 };
 

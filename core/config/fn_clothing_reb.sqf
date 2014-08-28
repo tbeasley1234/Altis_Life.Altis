@@ -36,9 +36,7 @@ switch (_filter) do
 			["H_Shemag_olive",nil,850],
 			["H_ShemagOpen_khk",nil,800],
 			["H_HelmetO_ocamo",nil,2500],
-			["H_MilCap_ocamo",nil,1200],
 			["H_MilCap_oucamo",nil,1200],
-			["H_Beret_blk",nil,3500],
 			["H_Bandanna_camo",nil,650]
 		];
 	};
@@ -63,13 +61,9 @@ switch (_filter) do
 	case 3:
 	{
 		[
-			["V_TacVest_camo",nil,12500],
-			["V_TacVest_blk",nil,12000],
+			["V_TacVest_khk",nil,12500],
 			["V_BandollierB_cbr",nil,4500],
-			["V_BandollierB_oli",nil,4500],
-			["V_HarnessO_brn",nil,7500],
-			["V_HarnessOSpec_brn",nil,8000],
-			["V_HarnessOGL_brn","Suicide Vest",200000]
+			["V_HarnessO_brn",nil,7500]
 		];
 	};
 	
@@ -77,13 +71,14 @@ switch (_filter) do
 	case 4:
 	{
 		[
+			["B_AssaultPack_cbr",nil,2500],
+			["B_Kitbag_mcamo",nil,4500],
+			["B_TacticalPack_oli",nil,3500],
 			["B_FieldPack_ocamo",nil,3000],
-			["B_Bergen_blk",nil,3500],
- 			["B_Bergen_sgg",nil,3500],
- 			["B_Kitbag_cbr",nil,4500],
+			["B_Bergen_sgg",nil,4500],
+			["B_Kitbag_cbr",nil,4500],
 			["B_Carryall_oli",nil,5000],
-			["B_Carryall_khk",nil,5000],
-			["B_Carryall_ocamo",nil,6500]
+			["B_Carryall_khk",nil,5000]
 		];
 	};
 };

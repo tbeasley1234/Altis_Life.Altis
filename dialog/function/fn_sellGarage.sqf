@@ -15,9 +15,9 @@ _vid = lbValue[2802,(lbCurSel 2802)];
 _pid = getPlayerUID player;
 _unit = player;
 
-if(isNil "_vehicle") exitWith {hint "The selection had a error..."};
+if(isNil "_vehicle") exitWith {hint localize "STR_Garage_Selection_Error"};
 
-_price = [_vehicle,__GETC__(life_garage_sell)] call fnc_index;
+_price = [_vehicle,__GETC__(life_garage_sell)] call TON_fnc_index;
 if(_price == -1) then {_price = 1000;} else {_price = (__GETC__(life_garage_sell) select _price) select 1;};
 
 [[_vid,_pid,_price,player,life_garage_type],"TON_fnc_vehicleDelete",false,false] spawn life_fnc_MP;

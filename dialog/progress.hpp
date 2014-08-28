@@ -37,6 +37,7 @@ class life_progress
 		};
 	};
 };
+
 class life_timer
 {
 	name = "life_timer";

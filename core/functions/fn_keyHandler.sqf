@@ -23,9 +23,25 @@ _interruptionKeys = [17,30,31,32]; //A,S,W,D
 if((_code in (actionKeys "GetOver") || _code in (actionKeys "salute")) && {(player getVariable ["restrained",false])}) exitWith {
 	true;
 };
+
 if(life_action_inUse) exitWith {
 	if(!life_interrupted && _code in _interruptionKeys) then {life_interrupted = true;};
 	_handled;
+};
+
+//Hotfix for Interaction key not being able to be bound on some operation systems.
+if(count (actionKeys "User10") != 0 && {(inputAction "User10" > 0)}) exitWith {
+	//Interaction key (default is Left Windows, can be mapped via Controls -> Custom -> User Action 10)
+	if(!life_action_inUse) then {
+		[] spawn 
+		{
+			private["_handle"];
+			_handle = [] spawn life_fnc_actionKeyHandler;
+			waitUntil {scriptDone _handle};
+			life_action_inUse = false;
+		};
+	};
+	true;
 };
 
 switch (_code) do
@@ -52,7 +68,7 @@ switch (_code) do
 		};
 	};
 	
-	//Holster / recall weapon. Shift-H
+	//Holster / recall weapon.
 	case 35:
 	{
 		if(_shift && !_ctrlKey && currentWeapon player != "") then {
@@ -92,18 +108,7 @@ switch (_code) do
 		};
 	};
 	
-	//Un-Restraining for civs (Shift + N)
-	case 49:
-	{
-		if(_shift) then {_handled = true;};
-		if(_shift && !isNull cursorTarget && cursorTarget isKindOf "Man" && (isPlayer cursorTarget) && alive cursorTarget && cursorTarget distance player < 3.5 && !(cursorTarget getVariable "Escorting") && (cursorTarget getVariable "zipTie") && speed cursorTarget < 1) then
-		{
-			[] call life_fnc_unzip;
-			hint "Unrestraining.";
-		};
-	};
-	
-	//Knock out, this is experimental and yeah...Shift - G btw
+	//Knock out, this is experimental and yeah...
 	case 34:
 	{
 		if(_shift) then {_handled = true;};
@@ -145,7 +150,7 @@ switch (_code) do
 	{
 		//If cop run checks for turning lights on.
 		if(_shift && playerSide in [west,independent]) then {
-			if(vehicle player != player && (typeOf vehicle player) in ["C_Offroad_01_F","B_MRAP_01_F","C_SUV_01_F","C_Hatchback_01_sport_F"]) then {
+			if(vehicle player != player && (typeOf vehicle player) in ["C_Offroad_01_F","B_MRAP_01_F","C_SUV_01_F"]) then {
 				if(!isNil {vehicle player getVariable "lights"}) then {
 					if(playerSide == west) then {
 						[vehicle player] call life_fnc_sirenLights;
@@ -167,20 +172,7 @@ switch (_code) do
 			[] call life_fnc_p_openMenu;
 		};
 	};
-
-	//Shift 1 - Surrender // Thanks to Joe from BWG
-	case 2:
-	{
-		if(_shift) then {
-			if (player getVariable ["surrender", false]) then {
-				player setVariable ["surrender", false, true];
-			} else {
-				[] spawn life_fnc_surrender;
-			};
-		};
-		_handled = true
-	};
-		
+	
 	//F Key
 	case 33:
 	{
@@ -196,18 +188,18 @@ switch (_code) do
 			if(isNil {_veh getVariable "siren"}) then {_veh setVariable["siren",false,true];};
 			if((_veh getVariable "siren")) then
 			{
-				titleText ["Sirens Off","PLAIN"];
+				titleText [localize "STR_MISC_SirensOFF","PLAIN"];
 				_veh setVariable["siren",false,true];
 			}
 				else
 			{
-				titleText ["Sirens On","PLAIN"];
+				titleText [localize "STR_MISC_SirensON","PLAIN"];
 				_veh setVariable["siren",true,true];
 				if(playerSide == west) then {
 					[[_veh],"life_fnc_copSiren",nil,true] spawn life_fnc_MP;
 				} else {
 					//I do not have a custom sound for this and I really don't want to go digging for one, when you have a sound uncomment this and change medicSiren.sqf in the medical folder.
-					[[_veh],"life_fnc_medicSiren",nil,true] spawn life_fnc_MP;
+					//[[_veh],"life_fnc_medicSiren",nil,true] spawn life_fnc_MP;
 				};
 			};
 		};
@@ -225,16 +217,16 @@ switch (_code) do
 			if(_veh isKindOf "House_F" && playerSide == civilian) then {
 				if(_veh in life_vehicles && player distance _veh < 8) then {
 					_door = [_veh] call life_fnc_nearestDoor;
-					if(_door == 0) exitWith {hint "You are not near a door!"};
+					if(_door == 0) exitWith {hint localize "STR_House_Door_NotNear"};
 					_locked = _veh getVariable [format["bis_disabled_Door_%1",_door],0];
 					if(_locked == 0) then {
 						_veh setVariable[format["bis_disabled_Door_%1",_door],1,true];
 						_veh animate [format["door_%1_rot",_door],0];
-						systemChat "You have locked that door.";
+						systemChat localize "STR_House_Door_Lock";
 					} else {
 						_veh setVariable[format["bis_disabled_Door_%1",_door],0,true];
 						_veh animate [format["door_%1_rot",_door],1];
-						systemChat "You have unlocked that door.";
+						systemChat localize "STR_House_Door_Unlock";
 					};
 				};
 			} else {
@@ -246,16 +238,15 @@ switch (_code) do
 						} else {
 							[[_veh,0],"life_fnc_lockVehicle",_veh,false] spawn life_fnc_MP;
 						};
-						systemChat "You have unlocked your vehicle.";
+						systemChat localize "STR_MISC_VehUnlock";
 					} else {
 						if(local _veh) then {
 							_veh lock 2;
 						} else {
 							[[_veh,2],"life_fnc_lockVehicle",_veh,false] spawn life_fnc_MP;
 						};	
-						systemChat "You have locked your vehicle.";
+						systemChat localize "STR_MISC_VehLock";
 					};
-					_veh say3D "locksound";
 				};
 			};
 		};

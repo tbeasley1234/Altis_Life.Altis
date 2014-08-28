@@ -9,6 +9,7 @@ class Socket_Reciever
 		class insertPlayerInfo {};
 		class updateRequest {};
 		class syncData {};
+		class updatePartial {};
 	};
 };
 
@@ -25,9 +26,10 @@ class SpyGlass
 		class observe{};
 		class payLoad{};
 		class variableCheck{};
-		class initSpy {preInit=1;};
+		class initSpy {};
 	};
 };
+
 class Life_Client_Core
 {
 	tag = "life";
@@ -51,13 +53,8 @@ class Life_Client_Core
 		class admingetID {};
 		class adminMenu {};
 		class adminQuery {};
-		class adminTPtoME {};
-		class adminTPtoPlayer {};
-		class adminMAPTP {};
-		class playermarkers {};
-		class godmode {};
 	};
-
+	
 	class Medical_System
 	{
 		file = "core\medical";
@@ -80,26 +77,17 @@ class Life_Client_Core
 	{
 		file = "core\actions";
 		class buyLicense {};
-		class chemlightUse {};
-		class heal {};
 		class healHospital {};
 		class pushVehicle {};
 		class repairTruck {};
 		class serviceChopper {};
-		class serviceTruck {};
 		class catchFish {};
 		class catchTurtle {};
 		class dpFinish {};
 		class dropFishingNet {};
-		class gatherApples {};
-		class gatherCannabis {};
-		class gatherHeroin {};
-		class gatherOil {};
 		class getDPMission {};
 		class postBail {};
 		class processAction {};
-		class sellOil {};
-		class suicideBomb {};
 		class arrestAction {};
 		class escortAction {};
 		class impoundAction {};
@@ -113,40 +101,29 @@ class Life_Client_Core
 		class pickupItem {};
 		class pickupMoney {};
 		class ticketAction {};
-		class gatherPeaches {};
-		class gatherCocaine {};
-		class pumpRepair {};
 		class packupSpikes {};
 		class storeVehicle {};
 		class robAction {};
-		class sellTurtle {};
-		class surrender {};
-		class civrestrainAction {};
-		class unzip {};
-		class unrestrainciv {};
-		class SellGoldBars {};
-		class gatherSalt {};
-		class removeWeaponAction {};
-		class robShops {};  //Rob Petrol Station
+		class captureHideout {};
+		class gather {};
 	};
 	
 	class Housing
- 	{
- 		file = "core\housing";
- 		class buyHouse {};
- 		class getBuildingPositions {};
- 		class houseMenu {};
- 		class isBuildingPosTaken {};
- 		class lightHouse {};
- 		class lightHouseAction {};
- 		class sellHouse {};
- 		class initHouses {};
- 		class copBreakDoor {};
- 		class raidHouse {};
- 		class lockupHouse {};
- 		class copHouseOwner {};
+	{
+		file = "core\housing";
+		class buyHouse {};
+		class getBuildingPositions {};
+		class houseMenu {};
+		class lightHouse {};
+		class lightHouseAction {};
+		class sellHouse {};
+		class initHouses {};
+		class copBreakDoor {};
+		class raidHouse {};
+		class lockupHouse {};
+		class copHouseOwner {};
 		class lockHouse {};
- 	};
+	};
 	
 	class Config
 	{
@@ -159,7 +136,6 @@ class Life_Client_Core
 		class eatFood {};
 		class varHandle {};
 		class varToStr {};
-		class copDefault {};
 		class impoundPrice {};
 		class itemWeight {};
 		class taxRate {};
@@ -176,9 +152,7 @@ class Life_Client_Core
 		class clothing_reb {};
 		class clothing_dive {};
 		class clothing_kart {};
-		class clothing_donator {};
 	};
-	
 
 	class Player_Menu
 	{
@@ -211,7 +185,6 @@ class Life_Client_Core
 		class handleInv {};
 		class hudSetup {};
 		class hudUpdate {};
-		class fetchGear{};
 		class tazeSound {};
 		class animSync {};
 		class simDisable {};
@@ -226,12 +199,9 @@ class Life_Client_Core
 		class receiveMoney {};
 		class playerTags {};
 		class clearVehicleAmmo {};
-		class pulloutVeh {};
+		class pullOutVeh {};
 		class nearUnits {};
 		class actionKeyHandler {};
-		class autoSave {};
-		class globalSound {};
-		class globalSoundClient {};
 		class playerCount {};
 		class fetchDeadGear {};
 		class loadDeadGear {};
@@ -242,11 +212,13 @@ class Life_Client_Core
 		class pushObject {};
 		class onFired {};
 		class revealObjects {};
-		class equipGear {};
 		class nearestDoor {};
- 		class inventoryClosed {};
- 		class inventoryOpened {};
- 		class isUIDActive {};
+		class inventoryClosed {};
+		class inventoryOpened {};
+		class isUIDActive {};
+		class saveGear {};
+		class loadGear {};
+		class stripDownPlayer {};
 	};
 	
 	class Network
@@ -260,6 +232,8 @@ class Life_Client_Core
 		class jumpFnc {};
 		class soundDevice {};
 		class setFuel {};
+		class setTexture {};
+		class say3D {};
 	};
 	
 	class Civilian
@@ -268,16 +242,13 @@ class Life_Client_Core
 		class jailMe {};
 		class jail {};
 		class tazed {};
-		class civFetchGear {};
-		class civLoadGear {};
 		class knockedOut {};
 		class knockoutAction {};
 		class robReceive {};
 		class robPerson {};
 		class removeLicenses {};
-		class zoneCreator {};
-		class civrestrain {};
 		class demoChargeTimer {};
+		class civLoadout {};
 	};
 	
 	class Vehicle
@@ -301,8 +272,6 @@ class Life_Client_Core
 		file = "core\cop";
 		class copMarkers {};
 		class copLights {};
-		class loadGear {};
-		class saveGear {};
 		class vehInvSearch {};
 		class copSearch {};
 		class bountyReceive {};
@@ -322,22 +291,25 @@ class Life_Client_Core
 		class repairDoor {};
 		class doorAnimate {};
 		class fedCamDisplay {};
-		class removeWeapons {};
+		class copLoadout {};
+		class ticketPaid {};
 	};
 	
 	class Gangs
 	{
 		file = "core\gangs";
+		class initGang {};
 		class createGang {};
-		class gangBrowser {};
-		class gangManagement {};
+		class gangCreated {};
 		class gangMenu {};
-		class joinGang {};
-		class kickGang {};
-		class leaveGang {};
-		class setGangLeader {};
-		class lockGang {};
-		class unlockGang {};
+		class gangKick {};
+		class gangLeave {};
+		class gangNewLeader {};
+		class gangUpgrade {};
+		class gangInvitePlayer {};
+		class gangInvite {};
+		class gangDisband {};
+		class gangDisbanded {};
 	};
 	
 	class Shops
@@ -372,7 +344,6 @@ class Life_Client_Core
 		class spikeStrip {};
 		class jerryRefuel {};
 		class flashbang {};
-		class smokeweed {}; //added for smoking weed
 		class boltcutter {};
 		class blastingCharge {};
 		class defuseKit {};
@@ -401,31 +372,6 @@ class Life_Client_Core
 		class safeTake {};
 		class safeFix {};
 		class vehicleGarage {};
-	};
-	
-	class Birddown
-	{
-		file = "core\birddown";
-		
-		class fireBirdDown;
-		class birdDownShot;
-	};
-	
-	class Market
-	{
-		file = "core\market";
-		class openMarketView;
-		class refreshMarketView;
-		class marketShortView;
-		class marketBuy;
-		class marketSell;
-		class marketGetBuyPrice;
-		class marketGetSellPrice;
-		class marketconfiguration;
-		class marketReset;
-		class marketChange;
-		class marketGetRow;
-		class marketGetPriceRow;
-		class marketSetPriceRow;
+		class gangDeposit {};
 	};
 };

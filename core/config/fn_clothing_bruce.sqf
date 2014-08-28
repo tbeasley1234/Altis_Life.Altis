@@ -31,7 +31,7 @@ switch (_filter) do
 		["U_C_HunterBody_grn","The Hunters Look",1500],
 		["U_C_WorkerCoveralls","Mechanic Coveralls",2500],
 		["U_OrestesBody","Surfing On Land",1100],
-		["U_Competitor","Mining Co. Security",5000]
+		["U_NikosAgedBody","Casual Wears",5000]
 		];
 	};
 	
@@ -95,12 +95,11 @@ switch (_filter) do
 	{
 		[
 			["B_AssaultPack_cbr",nil,2500],
-			["B_AssaultPack_sgg",nil,2500],
- 			["B_FieldPack_cbr",nil,3000],
- 			["B_Bergen_sgg",nil,3500],
- 			["B_Bergen_rgr",nil,4500],
+			["B_Kitbag_mcamo",nil,4500],
+			["B_TacticalPack_oli",nil,3500],
+			["B_FieldPack_ocamo",nil,3000],
+			["B_Bergen_sgg",nil,4500],
 			["B_Kitbag_cbr",nil,4500],
-			["B_Kitbag_sgg",nil,4500],
 			["B_Carryall_oli",nil,5000],
 			["B_Carryall_khk",nil,5000]
 		];

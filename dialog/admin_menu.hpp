@@ -64,9 +64,9 @@ class life_admin_menu {
 			idc = -1;
 			text = "$STR_Global_Close";
 			onButtonClick = "closeDialog 0;";
-			x = -0.03 + (5 / 40) + (1 / 250 / (safezoneW / safezoneH));
+			x = -0.06 + (6.25 / 40) + (1 / 250 / (safezoneW / safezoneH));
 			y = 0.88 - (1 / 25);
-			w = (5 / 40);
+			w = (6.25 / 40);
 			h = (1 / 25);
 		};
 		
@@ -74,70 +74,10 @@ class life_admin_menu {
 			idc = -1;
 			text = "$STR_Admin_GetID";
 			onButtonClick = "[] call life_fnc_admingetID;";
-			x = 0.1 + (5 / 40) + (1 / 250 / (safezoneW / safezoneH));
+			x = 0.1 + (6.25 / 40) + (1 / 250 / (safezoneW / safezoneH));
 			y = 0.88 - (1 / 25);
-			w = (5 / 40);
+			w = (6.25 / 40);
 			h = (1 / 25);
-		};
-		
-		class Spectator : Life_RscButtonMenu {
-			idc = -1;
-			text = "Spectate";
-			onButtonClick = "closeDialog 0; closeDialog 0; [player] execVM ""dialog\spectator\specta.sqf"";";
-			x = 0.62 + (5 / 40) + (1 / 250 / (safezoneW / safezoneH));
-			y = 0.88 - (1 / 25);
-			w = (5 / 40);
-			h = (1 / 25);
-		};
-		
-		class TPtoMe : Life_RscButtonMenu {
-			idc = -1;
-			text = "Plyr->Me";
-			onButtonClick = "[] call life_fnc_adminTPtoME;";
- 			x = 0.23 + (5 / 40) + (1 / 250 / (safezoneW / safezoneH));
- 			y = 0.88 - (1 / 25);
- 			w = (5 / 40);
- 			h = (1 / 25);
- 		};
-		
-		class TPtoPlayer : Life_RscButtonMenu {
-			idc = -1;
-			text = "Me->Plyr";
-			onButtonClick = "[] call life_fnc_adminTPtoPlayer;";
-			x = 0.36 + (5 / 40) + (1 / 250 / (safezoneW / safezoneH));
-			y = 0.88 - (1 / 25);
-			w = (5 / 40);
-			h = (1 / 25);
-		};
-		
-		class MAPTP : Life_RscButtonMenu {
- 			idc = -1;
- 			text = "MAP-TP";
- 			onButtonClick = "[] spawn life_fnc_adminMAPTP;";
- 			x = 0.49 + (5 / 40) + (1 / 250 / (safezoneW / safezoneH));
- 			y = 0.88 - (1 / 25);
- 			w = (5 / 40);
- 			h = (1 / 25);
- 		};
-		
-		class ESP : Life_RscButtonMenu {
-			idc = -1;
-			text = "ESP";
-			onButtonClick = "[] spawn life_fnc_playermarkers;";
-			x = -0.03 + (5 / 40) + (1 / 250 / (safezoneW / safezoneH));
- 			y = 0.93 - (1 / 25);
- 			w = (5 / 40);
- 			h = (1 / 25);
-		};
-		
-		class GodMode : Life_RscButtonMenu {
-			idc = -1;
-			text = "GodMode";
-			onButtonClick = "[] spawn life_fnc_godMode;";
-			x = 0.1 + (5 / 40) + (1 / 250 / (safezoneW / safezoneH));
- 			y = 0.93 - (1 / 25);
- 			w = (5 / 40);
- 			h = (1 / 25);
 		};
 	};
 };

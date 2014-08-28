@@ -50,14 +50,11 @@ switch (_item) do
 	case "spikeStrip": {15};
 	case "rock": {6};
 	case "cement": {5};
-	case "goldbar": {25};
-	case "zipties": {1};
-	case "antiairfuel": {40};
-	case "antiairfuelammo": {10};
+	case "goldbar": {12};
 	case "blastingcharge": {15};
 	case "boltcutter": {5};
 	case "defusekit": {2};
 	case "storagesmall": {5};
- 	case "storagebig": {10};
+	case "storagebig": {10};
 	default {1};
 };

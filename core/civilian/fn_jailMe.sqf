@@ -32,7 +32,7 @@ while {true} do
 {
 	if((round(_time - time)) > 0) then {
 		_countDown = [(_time - time),"MM:SS.MS"] call BIS_fnc_secondsToString;
-		hintSilent parseText format["Time Remaining:<br/> <t size='2'><t color='#FF0000'>%1</t></t><br/><br/>Can pay bail: %3<br/>Bail Price: $%2",_countDown,[life_bail_amount] call life_fnc_numberText,if(isNil "life_canpay_bail") then {"Yes"} else {"No"}];
+		hintSilent parseText format[(localize "STR_Jail_Time")+ "<br/> <t size='2'><t color='#FF0000'>%1</t></t><br/><br/>" +(localize "STR_Jail_Pay")+ " %3<br/>" +(localize "STR_Jail_Price")+ " $%2",_countDown,[life_bail_amount] call life_fnc_numberText,if(isNil "life_canpay_bail") then {"Yes"} else {"No"}];
 	};
 	
 	if(player distance (getMarkerPos "jail_marker") > 60) exitWith {
@@ -55,27 +55,28 @@ switch (true) do
 	{
 		life_is_arrested = false;
 		life_bail_paid = false;
-		hint "You have paid your bail and are now free.";
+		hint localize "STR_Jail_Paid";
 		serv_wanted_remove = [player];
 		player setPos (getMarkerPos "jail_release");
 		[[getPlayerUID player],"life_fnc_wantedRemove",false,false] spawn life_fnc_MP;
-		[] call SOCK_fnc_updateRequest;
+		[5] call SOCK_fnc_updatePartial;
 	};
 	
 	case (_esc) :
 	{
 		life_is_arrested = false;
-		hint "You have escaped from jail, you still retain your previous crimes and now have a count of escaping jail.";
-		[[0,format["%1 has escaped from jail!",player getVariable["realname",name player]]],"life_fnc_broadcast",nil,false] spawn life_fnc_MP;
-		[[getPlayerUID player,player getVariable["realname",name player],"901"],"life_fnc_wantedAdd",false,false] spawn life_fnc_MP;
+		hint localize "STR_Jail_EscapeSelf";
+		[[0,format[localize "STR_Jail_EscapeNOTF",profileName]],"life_fnc_broadcast",nil,false] spawn life_fnc_MP;
+		[[getPlayerUID player,profileName,"901"],"life_fnc_wantedAdd",false,false] spawn life_fnc_MP;
+		[5] call SOCK_fnc_updatePartial;
 	};
 	
 	case (alive player && !_esc && !_bail) :
 	{
 		life_is_arrested = false;
-		hint "You have served your time in jail and have been released.";
+		hint localize "STR_Jail_Released";
 		[[getPlayerUID player],"life_fnc_wantedRemove",false,false] spawn life_fnc_MP;
 		player setPos (getMarkerPos "jail_release");
-		[] call SOCK_fnc_updateRequest;
+		[5] call SOCK_fnc_updatePartial;
 	};
 };

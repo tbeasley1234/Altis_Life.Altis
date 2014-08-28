@@ -230,7 +230,7 @@ class playerSettings {
 		class ButtonMyGang : Life_RscButtonMenu {
 			idc = 2011;
 			text = "$STR_PM_MyGang";
-			onButtonClick = "[] call life_fnc_gangMenu";
+			onButtonClick = "if(isNil ""life_action_gangInUse"") then {if(isNil {(group player) getVariable ""gang_owner""}) then {createDialog ""Life_Create_Gang_Diag"";} else {[] spawn life_fnc_gangMenu;};};";
 			x = 0.1 + (6.25 / 19.8) + (1 / 250 / (safezoneW / safezoneH));
 			y = 0.8 - (1 / 25);
 			w = (6.25 / 40);
@@ -305,16 +305,6 @@ class playerSettings {
 			text = "$STR_PM_SyncData";
 			onButtonClick = "[] call SOCK_fnc_syncData;";
 			x = 0.1;
-			y = 0.805;
-			w = (6.25 / 40);
-			h = (1 / 25);
-		};
-		
-		class ButtonMarket : Life_RscButtonMenu {
-			idc = -1;
-			text = "$STR_PM_Market";
-			onButtonClick = "[] spawn life_fnc_openMarketView;";
-			x = 0.1 + (6.25 / 19.8) + (1 / 250 / (safezoneW / safezoneH));
 			y = 0.805;
 			w = (6.25 / 40);
 			h = (1 / 25);

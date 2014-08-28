@@ -1,3 +1,4 @@
+#include <macro.h>
 /*
 	File: fn_actionKeyHandler.sqf
 	Author: Bryan "Tonic" Boardwine
@@ -18,12 +19,13 @@ if(isNull _curTarget) exitWith {
 		if(!isNil "_fish") then {
 			[_fish] call life_fnc_catchFish;
 		};
+	} else {
+		[] call life_fnc_gather;
 	};
 };
 
-
 if(_curTarget isKindOf "House_F" && {player distance _curTarget < 12} OR ((nearestObject [[16019.5,16952.9,0],"Land_Dome_Big_F"]) == _curTarget OR (nearestObject [[16019.5,16952.9,0],"Land_Research_house_V1_F"]) == _curTarget)) exitWith {
- 	[_curTarget] call life_fnc_houseMenu;
+	[_curTarget] call life_fnc_houseMenu;
 };
 
 if(dialog) exitWith {}; //Don't bother when a dialog is open.
@@ -43,6 +45,8 @@ if(_curTarget isKindOf "Man" && {!alive _curTarget} && {playerSide in [west,inde
 		[_curTarget] call life_fnc_revivePlayer;
 	};
 };
+
+
 //If target is a player then check if we can use the cop menu.
 if(isPlayer _curTarget && _curTarget isKindOf "Man") then {
 	if((_curTarget getVariable["restrained",false]) && !dialog && playerSide == west) then {
@@ -53,7 +57,7 @@ if(isPlayer _curTarget && _curTarget isKindOf "Man") then {
 	private["_isVehicle","_miscItems","_money"];
 	_isVehicle = if((_curTarget isKindOf "landVehicle") OR (_curTarget isKindOf "Ship") OR (_curTarget isKindOf "Air")) then {true} else {false};
 	_miscItems = ["Land_BottlePlastic_V1_F","Land_TacticalBacon_F","Land_Can_V3_F","Land_CanisterFuel_F","Land_Suitcase_F"];
-	_animalTypes = ["Salema_F","Ornate_random_F","Mackerel_F","Tuna_F","Mullet_F","CatShark_F"];
+	_animalTypes = ["Salema_F","Ornate_random_F","Mackerel_F","Tuna_F","Mullet_F","CatShark_F","Turtle_F"];
 	_money = "Land_Money_F";
 	
 	//It's a vehicle! open the vehicle interaction key!
@@ -66,9 +70,15 @@ if(isPlayer _curTarget && _curTarget isKindOf "Man") then {
 	} else {
 		//Is it a animal type?
 		if((typeOf _curTarget) in _animalTypes) then {
-			private["_handle"];
-			_handle = [_curTarget] spawn life_fnc_catchFish;
-			waitUntil {scriptDone _handle};
+			if((typeOf _curTarget) == "Turtle_F" && !alive _curTarget) then {
+				private["_handle"];
+				_handle = [_curTarget] spawn life_fnc_catchTurtle;
+				waitUntil {scriptDone _handle};
+			} else {
+				private["_handle"];
+				_handle = [_curTarget] spawn life_fnc_catchFish;
+				waitUntil {scriptDone _handle};
+			};
 		} else {
 			//OK, it wasn't a vehicle so let's see what else it could be?
 			if((typeOf _curTarget) in _miscItems) then {

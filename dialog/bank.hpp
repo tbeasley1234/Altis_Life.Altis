@@ -83,6 +83,7 @@ class Life_atm_management {
 		w = 0.2; h = 0.03;
 		
 		};
+		
 		class PlayerList : Life_RscCombo 
 		{
 			idc = 2703;
@@ -102,6 +103,16 @@ class Life_atm_management {
 			y = 0.63;
 			w = (5.30 / 40);
 			h = (1 / 25);
+		};
+		
+		class GangDeposit : TransferButton
+		{
+			idc = 2705;
+			text = "$STR_pInAct_DepositToGang";
+			colorBackground[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.3843])", "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.7019])", "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.8862])", 0.5};
+			onButtonClick = "[] call life_fnc_gangDeposit";
+			y = .7; x = 0.365;
+			w = 0.275;
 		};
 		
 		class CloseButtonKey : Life_RscButtonMenu {

@@ -5,7 +5,6 @@
 	Starts the initialization of the server.
 */
 if(!(_this select 0)) exitWith {}; //Not server
-[] call compile preprocessFile "core\ROT\gridinit.sqf";
 [] call compile PreprocessFileLineNumbers "\life_server\init.sqf";
 master_group attachTo[bank_obj,[0,0,0]];
 
@@ -23,4 +22,5 @@ onMapSingleClick "if(_alt) then {vehicle player setPos _pos};";
 	_var attachTo [_hs, [-28.0336,-10.0317,0.0889387]]; 
 	detach _var;
 } foreach ["hospital_2","hospital_3"];
+
 [8,true,true,12] execFSM "core\fsm\timeModule.fsm";

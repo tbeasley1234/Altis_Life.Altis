@@ -7,14 +7,24 @@
 	
 	Will also become a standalone system which is why it's setup like this.
 */
+private["_binConfigPatches","_cfgPatches","_endM"];
 if(isServer && !hasInterface) exitWith {}; //Server doesn't need to know.
 #define __CONST__(var1,var2) var1 = compileFinal (if(typeName var2 == "STRING") then {var2} else {str(var2)})
+#define __GETC__(var) (call var)
 
-__CONST__(SPY_cfg_enableSys,false); //Set to false to disable the scripted Spyglass Anti-cheat.
-if(!(call SPY_cfg_enableSys)) exitWith {}; //Don't waste anymore time since it was disabled.
-//Additional configuration section.
-__CONST__(SPY_cfg_runVarCheck,true); //Run the variable checker? set to false if client performance is low.
-__CONST__(SPY_cfg_runPatchCheck,true); //Set to false to disable the patch checking (Not recommended but if you can't figure out how to white-list addons then whatever).
+__CONST__(W_O_O_K_I_E_ANTI_ANTI_HAX,"No");
+__CONST__(W_O_O_K_I_E_FUD_ANTI_ANTI_HAX,"No");
+__CONST__(E_X_T_A_S_Y_ANTI_ANTI_HAX,"CopyPasta");
+__CONST__(E_X_T_A_S_Y_Pro_RE,"Iswhat");
+__CONST__(E_X_T_A_S_Y_Car_RE,"Youdo");
+__CONST__(DO_NUKE,"LOL");
+__CONST__(JxMxE_spunkveh,"Blah");
+__CONST__(JxMxE_spunkveh2,"Blah");
+__CONST__(JxMxE_spunkair,"Blah");
+__CONST__(JJJJ_MMMM___EEEEEEE_LLYYSSTTIICCC_SHIT_RE,"No");
+__CONST__(JJJJ_MMMM___EEEEEEE_LLYYSSTTIICCC_SHIT_RE_OLD,"No");
+__CONST__(JJJJ_MMMM___EEEEEEE_SPAWN_VEH,"No");
+__CONST__(JJJJ_MMMM___EEEEEEE_SPAWN_WEAPON,"No");
 
 /*
 	Compile our list of allowed addon patches, by default this DOES NOT ALLOW ANY ADDONS.
@@ -45,7 +55,7 @@ __CONST__(SPY_cfg_runPatchCheck,true); //Set to false to disable the patch check
 	"JSRS2_Po30_Orca","JSRS2_Strider","JSRS2_SUV","JSRS2_T100_Varsuk","JSRS2_Truck1","JSRS2_Truck2","JSRS2_UAV_1","JSRS2_UH80_GhostHawk","JSRS2_Van","JSRS2_WY55_Hellcat","JSRS2_ZSU39_Tigris","cba_xeh_a3"]
 */
 	
-SPY_cfg_patchList = 
+_patchList = 
 ["life_server","CAData","A3_BaseConfig_F","A3_Dubbing_Radio_F","A3_Functions_F","A3_Functions_F_EPA","A3_Functions_F_EPC","A3_Data_F","A3_Data_F_ParticleEffects","A3_Editor_F","A3_Functions_F_Curator",
 "A3_Language_F","A3_Language_F_Beta","A3_Language_F_Curator","A3_Language_F_EPA","A3_Language_F_EPB","A3_Language_F_EPC","A3_Language_F_Gamma","A3_LanguageMissions_F","A3_LanguageMissions_F_Beta",
 "A3_LanguageMissions_F_Gamma","A3_Misc_F","A3_Misc_F_Helpers","A3_Modules_F","A3_Modules_F_DynO","A3_Modules_F_Effects","A3_Modules_F_Events","A3_Modules_F_GroupModifiers","A3_Modules_F_HC",
@@ -97,13 +107,98 @@ SPY_cfg_patchList =
 "A3_Soft_F_Gamma_Quadbike","A3_Soft_F_SUV","A3_Soft_F_Gamma_HEMTT","A3_Soft_F_Gamma_TruckHeavy","A3_Soft_F_Truck","A3_Structures_F_Wrecks","A3_Structures_F_EPA_Mil_Scrapyard","A3_Air_F_EPC_Plane_Fighter_03",
 "A3_Armor_F_AMV","A3_Armor_F_Marid","A3_Armor_F_EPC_MBT_01","A3_Armor_F_APC_Wheeled_03","A3_CargoPoses_F","A3_Soft_F_Crusher_UGV","A3_Missions_F_Curator","A3_Data_F_Kart_ParticleEffects","A3_Language_F_Kart",
 "A3_LanguageMissions_F_Kart","A3_Structures_F_Kart_Civ_SportsGrounds","A3_Structures_F_Kart_Mil_Flags","A3_Anims_F_Kart","A3_Structures_F_Kart_Signs_Companies","A3_UI_F_Kart",
+"A3_Weapons_F_Kart_Pistols_Pistol_Signal_F","A3_Data_F_Kart","A3_Missions_F_Kart","A3_Modules_F_Kart","A3_Modules_F_Kart_TimeTrials","A3_Weapons_F_Kart","A3_Characters_F_Kart","A3_Soft_F_Kart_Kart_01",
 "A3_Structures_F_Civ_Graffiti","A3_Structures_F_Civ_Kiosks","A3_Structures_F_Civ_Tourism","A3_Structures_F_Items_Medical","A3_Structures_F_Items_Military","A3_Structures_F_Naval_Fishing","A3_Structures_F_Signs_Companies","A3_Structures_F_Mil_Scrapyard",
-"A3_Weapons_F_Kart_Pistols_Pistol_Signal_F","A3_Data_F_Kart","A3_Missions_F_Kart","A3_Modules_F_Kart","A3_Modules_F_Kart_TimeTrials","A3_Weapons_F_Kart","A3_Characters_F_Kart","A3_Soft_F_Kart_Kart_01"];
+"A3_Soft_F_Bootcamp_Truck","A3_Soft_F_Bootcamp_Quadbike","A3_Soft_F_Bootcamp_Offroad_01","A3_Weapons_F_Bootcamp","A3_Modules_F_Bootcamp_Misc","A3_Modules_F_Bootcamp","A3_Characters_F_Bootcamp_Common","A3_Weapons_F_Bootcamp_Ammoboxes","A3_UI_F_Bootcamp",
+"A3_Characters_F_Bootcamp","A3_Weapons_F_Bootcamp_LongRangeRifles_M320","A3_Weapons_F_Bootcamp_LongRangeRifles_GM6","A3_Structures_F_Bootcamp_Items_Food","A3_Structures_F_Bootcamp_Items_Electronics","A3_Structures_F_Bootcamp_Civ_SportsGrounds",
+"A3_Structures_F_Bootcamp_Civ_Camping","A3_Language_F_Bootcamp","A3_Functions_F_Bootcamp","A3_Structures_F_Bootcamp_VR_Helpers","A3_Structures_F_Bootcamp_VR_CoverObjects","A3_Structures_F_Bootcamp_VR_Blocks","A3_Structures_F_Bootcamp_Training",
+"A3_Structures_F_Bootcamp_System","A3_Structures_F_Bootcamp_Items_Sport","A3_Structures_F_Bootcamp_Ind_Cargo","A3_Sounds_F_Bootcamp","A3_Data_F_Bootcamp","A3_Map_VR_Scenes","A3_Missions_F_Bootcamp","A3_Music_F_Bootcamp","Map_VR"
+];
 
-__CONST__(SPY_cfg_patchList,SPY_cfg_patchList); //Make the array static / constant.
 uiNamespace setVariable["RscDisplayRemoteMissions",displayNull]; //For Spy-Glass..
 
+_endM = compile PreProcessFileLineNumbers "\a3\functions_f\Misc\fn_endMission.sqf";
+
+_binConfigPatches = configFile >> "CfgPatches";
+for "_i" from 0 to count (_binConfigPatches)-1 do {
+	_patchEntry = _binConfigPatches select _i;
+	if(isClass _patchEntry) then {
+		if(!((configName _patchEntry) in _patchList)) exitWith {
+			[[profileName,getPlayerUID player,(configName _patchEntry)],"SPY_fnc_cookieJar",false,false] spawn life_fnc_MP;
+			[[profileName,format["Unknown Addon Patch: %1",(configName _patchEntry)]],"SPY_fnc_notifyAdmins",true,false] spawn life_fnc_MP;
+			sleep 0.5;
+			["SpyGlass",false,false] call _endM;
+		};
+	};
+};
+
+//Check for copy-pasters of Dev-Con styled execution.
+//Because I am nice, add these to the following below to allow CBA; "CBA_CREDITS_CONT_C","CBA_CREDITS_M_P
+private["_children","_allowedChildren"];
+_children = [configFile >> "RscDisplayMPInterrupt" >> "controls",0] call BIS_fnc_returnChildren;
+_allowedChildren = [
+"Title","MissionTitle","DifficultyTitle","PlayersName","ButtonCancel","ButtonSAVE","ButtonSkip","ButtonRespawn","ButtonOptions",
+"ButtonVideo","ButtonAudio","ButtonControls","ButtonGame","ButtonTutorialHints","ButtonAbort","DebugConsole","Feedback","MessageBox"
+];
+
+{
+	if(!((configName _x) in _allowedChildren)) exitWith {
+		[[profileName,getPlayerUID player,"Modified_MPInterrupt"],"SPY_fnc_cookieJar",false,false] spawn life_fnc_MP;
+		[[profileName,"Devcon like executor detected"],"SPY_fnc_notifyAdmins",true,false] spawn life_fnc_MP;
+		sleep 0.5;
+		["SpyGlass",false,false] call _endM;
+	};
+} foreach _children;
+
+//Validate that RscDisplayInventory is not modified common cheat-engine sqf executor method.
+private["_onLoad","_onUnload"];
+_onLoad = getText(configFile >> "RscDisplayInventory" >> "onLoad");
+_onUnload = getText(configFile >> "RscDisplayInventory" >> "onUnload");
+
+if(_onLoad != "[""onLoad"",_this,""RscDisplayInventory"",'IGUI'] call compile preprocessfilelinenumbers ""A3\ui_f\scripts\initDisplay.sqf""") exitWith {
+	[[profileName,getPlayerUID player,"Modified_RscDisplayInventory_onLoad"],"SPY_fnc_cookieJar",false,false] spawn life_fnc_MP;
+	[[profileName,"Modified RscDisplayInventory_onLoad (CheatEngine injection)"],"SPY_fnc_notifyAdmins",true,false] spawn life_fnc_MP;
+	sleep 0.5;
+	["SpyGlass",false,false] call _endM;
+};
+if(_onUnload != "[""onUnload"",_this,""RscDisplayInventory"",'IGUI'] call compile preprocessfilelinenumbers ""A3\ui_f\scripts\initDisplay.sqf""") exitWith {
+	[[profileName,getPlayerUID player,"Modified_RscDisplayInventory_onUnload"],"SPY_fnc_cookieJar",false,false] spawn life_fnc_MP;
+	[[profileName,"Modified RscDisplayInventory_onUnload (CheatEngine injection)"],"SPY_fnc_notifyAdmins",true,false] spawn life_fnc_MP;
+	sleep 0.5;
+	["SpyGlass",false,false] call _endM;
+};
+
+//Validate something else..
+_onLoad = getText(configFile >> "RscDisplayLoadMission" >> "onLoad");
+_onUnload = getText(configFile >> "RscDisplayLoadMission" >> "onUnload");
+if(_onLoad != "[""onLoad"",_this,""RscDisplayLoading"",'Loading'] call compile preprocessfilelinenumbers ""A3\ui_f\scripts\initDisplay.sqf""") exitWith {
+	[[profileName,getPlayerUID player,"Modified_RscDisplayInventory_onLoad"],"SPY_fnc_cookieJar",false,false] spawn life_fnc_MP;
+	[[profileName,"Modified RscDisplayInventory_onLoad (CheatEngine injection)"],"SPY_fnc_notifyAdmins",true,false] spawn life_fnc_MP;
+	sleep 0.5;
+	["SpyGlass",false,false] call _endM;
+};
+if(_onUnload != "[""onUnload"",_this,""RscDisplayLoading"",'Loading'] call compile preprocessfilelinenumbers ""A3\ui_f\scripts\initDisplay.sqf""") exitWith {
+	[[profileName,getPlayerUID player,"Modified_RscDisplayInventory_onUnload"],"SPY_fnc_cookieJar",false,false] spawn life_fnc_MP;
+	[[profileName,"Modified RscDisplayInventory_onUnload (CheatEngine injection)"],"SPY_fnc_notifyAdmins",true,false] spawn life_fnc_MP;
+	sleep 0.5;
+	["SpyGlass",false,false] call _endM;
+};
+
+[] execVM "SpyGlass\fn_cmdMenuCheck.sqf";
+[] execVM "SpyGlass\fn_variableCheck.sqf";
+[] execVM "SpyGlass\fn_menuCheck.sqf";
+
+//Create a no-recoil hack check.
 [] spawn {
-	waitUntil {(!isNil "life_fnc_moveIn" && !isNil "life_adminlevel")};
-	[] call SPY_fnc_payLoad; //Initialize Spyglass.
+	waitUntil {(!isNil "life_fnc_moveIn") && !isNull (findDisplay 46)};
+	_endM = compile PreProcessFileLineNumbers "\a3\functions_f\Misc\fn_endMission.sqf";
+	while {true} do {
+		if((unitRecoilCoefficient player) < 1) then {
+			[[profileName,getPlayerUID player,"No_recoil_hack"],"SPY_fnc_cookieJar",false,false] spawn life_fnc_MP;
+			[[profileName,"No recoil hack"],"SPY_fnc_notifyAdmins",true,false] spawn life_fnc_MP;
+			sleep 0.5;
+			["SpyGlass",false,false] call _endM;
+		};
+		sleep 1.5;
+	};
 };

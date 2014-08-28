@@ -25,10 +25,6 @@ switch (typeOf _vehicle) do
 	{
 		_lightleft lightAttachObject [_vehicle, [-0.37, 0.0, 0.56]];
 	};
-	case "C_SUV_01_F":
-	{
-		_lightleft lightAttachObject [_vehicle, [-0.37,-1.2,0.42]];
-	};
 };
 
 _lightleft setLightAttenuation [0.181, 0, 1000, 130]; 
@@ -48,10 +44,6 @@ switch (typeOf _vehicle) do
 	case "C_Offroad_01_F":
 	{
 		_lightright lightAttachObject [_vehicle, [0.37, 0.0, 0.56]];
-	};
-	case "C_SUV_01_F":
-	{
-		_lightright lightAttachObject [_vehicle, [0.37,-1.2,0.42]];
 	};
 };
   

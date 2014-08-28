@@ -24,8 +24,6 @@ __CONST__(JJJJ_MMMM___EEEEEEE_LLYYSSTTIICCC_SHIT_RE,"No");
 __CONST__(JJJJ_MMMM___EEEEEEE_LLYYSSTTIICCC_SHIT_RE_OLD,"No");
 __CONST__(JJJJ_MMMM___EEEEEEE_SPAWN_VEH,"No");
 __CONST__(JJJJ_MMMM___EEEEEEE_SPAWN_WEAPON,"No");
-if(!(__GETC__(SPY_cfg_enableSys))) exitWith {}; //Don't waste anymore time since it was disabled.
-//if(__GETC__(life_adminlevel) != 0) exitWith {}; //Don't run this for admins?
 
 //Make sure all functions were offloaded to the client..
 waitUntil {!isNil "SPY_fnc_menuCheck" && !isNil "SPY_fnc_variablecheck" && !isNil "SPY_fnc_cmdMenuCheck"};
@@ -80,8 +78,9 @@ if(_onUnload != "[""onUnload"",_this,""RscDisplayInventory"",'IGUI'] call compil
 	[[profileName,"Modified RscDisplayInventory_onUnload (CheatEngine injection)"],"SPY_fnc_notifyAdmins",true,false] spawn life_fnc_MP;
 	sleep 0.5;
 	["SpyGlass",false,false] call BIS_fnc_endMission;
-};	
+};
 
+	
 //Launch our workers
 [] call SPY_fnc_menuCheck;
 [] spawn SPY_fnc_cmdMenuCheck;
@@ -89,6 +88,7 @@ if(_onUnload != "[""onUnload"",_this,""RscDisplayInventory"",'IGUI'] call compil
 
 //Create a no-recoil hack check.
 [] spawn {
+	waitUntil {(!isNil "life_fnc_moveIn")};
 	while {true} do {
 		if((unitRecoilCoefficient player) < 1) then {
 			[[profileName,getPlayerUID player,"No_recoil_hack"],"SPY_fnc_cookieJar",false,false] spawn life_fnc_MP;

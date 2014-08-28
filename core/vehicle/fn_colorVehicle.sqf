@@ -57,4 +57,3 @@ if(typeOf _vehicle == "C_Offroad_01_F") then
 		_vehicle setObjectTexture[1,_texture];
 	};
 };
-

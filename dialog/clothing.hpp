@@ -32,7 +32,7 @@ class Life_Clothing {
 			colorBackground[] = {0, 0, 0, 0};
 			idc = 3103;
 			text = "";
-			x = (1 / 250 / (safezoneW / safezoneH));		
+			x = (1 / 250 / (safezoneW / safezoneH));
 			y = 0;
 			w = 0.6;
 			h = (1 / 25);
@@ -57,7 +57,7 @@ class Life_Clothing {
 			text = "";
 			sizeEx = 0.035;
 			
-			x = (1 / 250 / (safezoneW / safezoneH));			
+			x = (1 / 250 / (safezoneW / safezoneH));
 			y = 0.45 - (1 / 25);
 			w = 0.2;
 			h = 0.2;
@@ -69,7 +69,7 @@ class Life_Clothing {
 			text = "";
 			sizeEx = 0.035;
 			
-			x = 0.15 + (1 / 250 / (safezoneW / safezoneH));			
+			x = 0.15 + (1 / 250 / (safezoneW / safezoneH));
 			y = 0.45 - (1 / 25);
 			w = 0.2;
 			h = 0.13;
@@ -105,7 +105,7 @@ class Life_Clothing {
 			x = (1 / 250 / (safezoneW / safezoneH));
 			y = 0.54 - (1 / 25);
 			w = (6.25 / 40);
-			h = (1 / 25);			
+			h = (1 / 25);
 		};
 	};
 };

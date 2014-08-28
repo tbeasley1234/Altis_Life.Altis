@@ -4,7 +4,6 @@
 */
 life_firstSpawn = true;
 life_session_completed = false;
-player enableFatigue false;
 private["_handle","_timeStamp"];
 0 cutText["Setting up client, please wait...","BLACK FADED"];
 0 cutFadeOut 9999999;
@@ -24,7 +23,7 @@ diag_log "::Life Client:: Setting up user actions";
 [] call life_fnc_setupActions;
 diag_log "::Life Client:: User actions completed";
 diag_log "::Life Client:: Waiting for server functions to transfer..";
-waitUntil {(!isNil {clientGangLeader})};
+waitUntil {(!isNil {TON_fnc_clientGangLeader})};
 diag_log "::Life Client:: Received server functions.";
 0 cutText ["Waiting for the server to be ready...","BLACK FADED"];
 0 cutFadeOut 99999999;
@@ -66,7 +65,7 @@ switch (playerSide) do
 		waitUntil {scriptDone _handle};
 	};
 };
-[] execVM "core\fastrope\zlt_fastrope.sqf";
+
 player setVariable["restrained",false,true];
 player setVariable["Escorting",false,true];
 player setVariable["transporting",false,true];
@@ -77,7 +76,6 @@ waitUntil {!(isNull (findDisplay 46))};
 diag_log "Display 46 Found";
 (findDisplay 46) displayAddEventHandler ["KeyDown", "_this call life_fnc_keyHandler"];
 player addRating 99999999;
-
 diag_log "------------------------------------------------------------------------------------------------------";
 diag_log format["                End of Altis Life Client Init :: Total Execution Time %1 seconds ",(diag_tickTime) - _timeStamp];
 diag_log "------------------------------------------------------------------------------------------------------";
@@ -85,28 +83,16 @@ life_sidechat = true;
 [[player,life_sidechat,playerSide],"TON_fnc_managesc",false,false] spawn life_fnc_MP;
 0 cutText ["","BLACK IN"];
 [] call life_fnc_hudSetup;
-
 LIFE_ID_PlayerTags = ["LIFE_PlayerTags","onEachFrame","life_fnc_playerTags"] call BIS_fnc_addStackedEventHandler;
 LIFE_ID_RevealObjects = ["LIFE_RevealObjects","onEachFrame","life_fnc_revealObjects"] call BIS_fnc_addStackedEventHandler;
 [] call life_fnc_settingsInit;
 player setVariable["steam64ID",getPlayerUID player];
-[] spawn {
-	private["_name"];
-	_name = "";
-	while {true} do {
-		_name = name player;
-		if(_name != "Error: No unit") exitWith {};
-	};
-	player setVariable["realname",_name,true];
-};
+player setVariable["realname",profileName,true];
 life_fnc_moveIn = compileFinal
 "
 	player moveInCargo (_this select 0);
 ";
 
 [] execVM "core\init_survival.sqf";
-// Init automatically saving gear
-[] spawn life_fnc_autoSave;
-
 
 __CONST__(life_paycheck,life_paycheck); //Make the paycheck static.

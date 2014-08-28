@@ -10,9 +10,9 @@
 #define Btn3 37452
 #define Btn4 37453
 #define Btn5 37454
-#define Btn6 37455		//Add new button for flip car action
+#define Btn6 37455
 #define Title 37401
-private["_display","_curTarget","_Btn1","_Btn2","_Btn3","_Btn4","_Btn5","_Btn6"];	//Add new button for flip car (button 6)
+private["_display","_curTarget","_Btn1","_Btn2","_Btn3","_Btn4","_Btn5","_Btn6"];
 if(!dialog) then {
 	createDialog "vInteraction_Menu";
 };
@@ -27,14 +27,14 @@ _Btn2 = _display displayCtrl Btn2;
 _Btn3 = _display displayCtrl Btn3;
 _Btn4 = _display displayCtrl Btn4;
 _Btn5 = _display displayCtrl Btn5;
-_Btn6 = _display displayCtrl Btn6;		//Button 6 add (flip car)
+_Btn6 = _display displayCtrl Btn6;
 life_vInact_curTarget = _curTarget;
 
 //Set Repair Action
 _Btn1 ctrlSetText localize "STR_vInAct_Repair";
 _Btn1 buttonSetAction "[life_vInact_curTarget] spawn life_fnc_repairTruck;";
 
-if("ToolKit" in (items player)) then {_Btn1 ctrlEnable true;} else {_Btn1 ctrlEnable false;};
+if("ToolKit" in (items player) && (damage _curTarget < 1)) then {_Btn1 ctrlEnable true;} else {_Btn1 ctrlEnable false;};
 
 if(playerSide == west) then {
 	_Btn2 ctrlSetText localize "STR_vInAct_Registration";
