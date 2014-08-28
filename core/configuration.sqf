@@ -48,6 +48,8 @@ __CONST__(life_gangUpgradeMultipler,2.5); //BLAH
 
 //Uniform price (0),Hat Price (1),Glasses Price (2),Vest Price (3),Backpack Price (4)
 life_clothing_purchase = [-1,-1,-1,-1,-1];
+life_spectator_admin_lvl = 2; //Custom
+life_teleport_admin_lvl = 3;  //Custom
 /*
 *****************************
 ****** Weight Variables *****
